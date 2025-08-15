@@ -181,3 +181,90 @@ img{ max-width:100%; display:block; }
 
 /* make long sections easier to read */
 .section{ padding:60px 0; }
+
+/* Top-left name */
+.nav .brand{
+  font-family:"Space Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  font-weight:700;
+  letter-spacing:.2px;
+  font-size:clamp(1.2rem, 2.4vw, 1.8rem);
+  line-height:1;
+}
+
+/* Big centered subtitle in hero */
+.hero .subtitle{
+  font-size:clamp(1.4rem, 3.3vw, 2.3rem);
+  font-weight:600;
+  opacity:.98;
+}
+
+/* Smaller scroll cue */
+.scroll-cue{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:.85rem; opacity:.8; margin-top:12px;
+}
+.scroll-cue svg{ width:14px; height:14px; animation:bounce 1.6s infinite; }
+@keyframes bounce{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+
+
+/* Ensure hero can host absolutely positioned children */
+.hero{ position:relative; }
+
+/* Larger centered subtitle */
+.hero .subtitle{
+  font-size: clamp(1.4rem, 3.3vw, 2.2rem);
+  font-weight:600;
+  opacity:.98;
+  text-align:center;
+}
+
+/* Smaller scroll cue */
+.scroll-cue{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:.85rem; opacity:.8; margin-top:12px;
+}
+.scroll-cue svg{ width:14px; height:14px; animation:bounce 1.6s infinite; }
+@keyframes bounce{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+
+/* Center the hero content */
+.hero{
+  position:relative;
+  min-height:calc(100svh - var(--nav-h));
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:60px 20px;
+}
+
+/* Big centered title */
+.hero-title{
+  font-family:"Space Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  font-weight:1000;
+  letter-spacing:.2px;
+  font-size: clamp(5rem, 14vw, 16rem);
+  line-height:1.04;
+  margin:0 0 12px;
+}
+
+/* Larger subtitle under the title */
+.hero .subtitle{
+  font-size:clamp(1.3rem, 3.2vw, 2.2rem);
+  font-weight:600;
+  opacity:.98;
+  margin:0;
+}
+
+/* Small scroll cue */
+.scroll-cue{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:.8rem; opacity:.8; margin-top:12px;
+}
+.scroll-cue svg{ width:12px; height:12px; animation:bounce 1.6s infinite; }
+@keyframes bounce{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+
+.hero-title{
+  font-family:"Space Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+  font-weight:700;
+  letter-spacing:.2px;
+  line-height:1.04;
+  font-size: clamp(5rem, 14vw, 16rem); /* TEMPORARY !important */
+  margin:0 0 12px;
+}

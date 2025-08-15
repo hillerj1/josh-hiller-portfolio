@@ -11,18 +11,36 @@ const { title = "Josh Hiller — Portfolio", description = "Software engineer fo
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <nav class="nav">
-      <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:100%;">
-        <a href="/#home" class="brand" style="text-decoration:none;">Josh Hiller</a>
-        <div style="display:flex;gap:6px;">
-          <a href="/#home">Home</a>
-          <a href="/#projects">Projects</a>
-          <a href="/#about">About</a>
-          <a href="/#contact">Contact</a>
-          <a href="/resume/Josh_Hiller_Resume.pdf" target="_blank" rel="noopener">Resume</a>
-        </div>
-      </div>
-    </nav>
+    <video
+      id="bg-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="/assets/hero-poster.jpg"
+      preload="auto"
+    >
+      <source src="/assets/hero-bg.webm" type="video/webm" />
+      <source src="/assets/hero-bg.mp4"  type="video/mp4"  />
+    </video>
+    <div class="bg-overlay"></div>
+
+    <!-- your nav, <slot />, footer... -->
+
+   <nav class="nav">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:100%;">
+    <!-- <a href="/#home" class="brand" style="text-decoration:none;">Josh Hiller</a> -->
+
+    <div style="display:flex;gap:6px;">
+      <a href="/#home">Home</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+      <a href="/resume/Josh_Hiller_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </div>
+  </div>
+</nav>
+
 
     <!-- exactly ONE slot -->
     <slot />
