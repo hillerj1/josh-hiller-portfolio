@@ -1,33 +1,18 @@
 ---
-/* No data needed; pure hero */
+/* Pure hero section; background image in CSS */
 ---
 
-<section
-  style="
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    min-height:68vh;
-    padding:60px 20px;
-    color:#fff;
-    background:
-      linear-gradient(rgba(15,23,42,0.6),rgba(15,23,42,0.6)),
-      url('/assets/hero-bg.jpg') center/cover no-repeat;
-  "
->
-  <div style="max-width:900px;">
-    <h1 style="margin:0 0 14px;font-size:2.6rem;line-height:1.15;">
-      Josh Hiller: Software Engineer with a focus on Quantum Computing
-    </h1>
-    <p style="margin:0 auto 18px;opacity:.95;max-width:780px;font-size:1.1rem;">
-      Building robust software solutions for today's problems while exploring the next generation of quantum algorithms.
+<section class="hero">
+  <div class="container">
+    <h1>Josh Hiller: Software Engineer with a focus on Quantum Computing</h1>
+    <p class="lead">
+      Building robust software solutions for today’s problems while exploring the next generation of quantum algorithms.
     </p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:10px;">
-      <a href="/projects" style="text-decoration:none;background:#111827;color:#fff;padding:10px 16px;border-radius:10px;">View My Projects</a>
-      <a href="/resume/Josh_Hiller_Resume.pdf" target="_blank" rel="noopener" style="text-decoration:none;background:#2563eb;color:#fff;padding:10px 16px;border-radius:10px;">Download Resume</a>
-      <a href="/about" style="text-decoration:none;background:#e2e8f0;color:#0f172a;padding:10px 16px;border-radius:10px;">About Me</a>
+    <div class="btn-row" style="justify-content:center;">
+      <a href="/projects" class="btn btn-dark">View My Projects</a>
+      <a href="/resume/Josh_Hiller_Resume.pdf" target="_blank" rel="noopener" class="btn btn-primary">Download Resume</a>
+      <a href="/about" class="btn" style="background:rgba(255,255,255,.12);color:#fff;">About Me</a>
     </div>
   </div>
 </section>
+

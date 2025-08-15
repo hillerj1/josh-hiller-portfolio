@@ -3,39 +3,37 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
 const all = await getCollection('projects');
-const software = all.filter((p) => p.data.group === 'Software')
-  .sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
-const quantum = all.filter((p) => p.data.group === 'Quantum')
-  .sort((a, b) => (b.data.date ?? '').localeCompare(a.data.date ?? ''));
+const software = all.filter((p) => p.data.group === 'Software').sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
+const quantum  = all.filter((p) => p.data.group === 'Quantum').sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
 ---
 
-<Layout title="Projects — Josh Hiller">
-  <main style="max-width:1100px;margin:0 auto;padding:28px 20px 60px;">
-    <h1 style="margin:0 0 18px;">Projects</h1>
+<Layout title="Projects — Josh Hiller" description="Software Engineering and Quantum Computing projects.">
+  <main class="container pad-y-xl">
+    <h1 class="h1 mb-sm">Projects</h1>
 
-    <h2 style="font-size:1.3rem;margin:22px 0 12px;">Quantum Computing</h2>
-    <div style="display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));">
+    <h2 class="mb-sm">Quantum Computing</h2>
+    <div class="grid">
       {quantum.map(({ slug, data }) => (
-        <a href={`/projects/${slug}/`} style="text-decoration:none;color:inherit;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.08);display:flex;flex-direction:column;">
-          <img src={data.image} alt={data.title} style="width:100%;aspect-ratio:16/9;object-fit:cover;" loading="lazy" />
+        <a href={`/projects/${slug}/`} class="card-link">
+          <img src={data.image} alt={data.title} loading="lazy" />
           <div style="padding:16px 16px 18px;">
-            <div style="font-size:.85rem;opacity:.7;margin-bottom:6px;">{data.category}</div>
+            <div class="muted mb-xs">{data.category}</div>
             <h3 style="margin:0 0 6px;font-size:1.1rem;">{data.title}</h3>
-            <p style="margin:0;opacity:.8;line-height:1.45;">{data.summary}</p>
+            <p class="muted" style="line-height:1.45;">{data.summary}</p>
           </div>
         </a>
       ))}
     </div>
 
-    <h2 style="font-size:1.3rem;margin:26px 0 12px;">Software Engineering</h2>
-    <div style="display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));">
+    <h2 class="mt-md mb-sm">Software Engineering</h2>
+    <div class="grid">
       {software.map(({ slug, data }) => (
-        <a href={`/projects/${slug}/`} style="text-decoration:none;color:inherit;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.08);display:flex;flex-direction:column;">
-          <img src={data.image} alt={data.title} style="width:100%;aspect-ratio:16/9;object-fit:cover;" loading="lazy" />
+        <a href={`/projects/${slug}/`} class="card-link">
+          <img src={data.image} alt={data.title} loading="lazy" />
           <div style="padding:16px 16px 18px;">
-            <div style="font-size:.85rem;opacity:.7;margin-bottom:6px;">{data.category}</div>
+            <div class="muted mb-xs">{data.category}</div>
             <h3 style="margin:0 0 6px;font-size:1.1rem;">{data.title}</h3>
-            <p style="margin:0;opacity:.8;line-height:1.45;">{data.summary}</p>
+            <p class="muted" style="line-height:1.45;">{data.summary}</p>
           </div>
         </a>
       ))}
