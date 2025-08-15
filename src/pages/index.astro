@@ -1,8 +1,100 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
----
-<Layout>
-  <Welcome />
-</Layout>
+import { getCollection } from 'astro:content';
 
+const all = await getCollection('projects');
+const software = all.filter((p) => p.data.group === 'Software')
+  .sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
+const quantum = all.filter((p) => p.data.group === 'Quantum')
+  .sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
+---
+
+<Layout title="Josh Hiller — Portfolio">
+  <!-- HOME / HERO -->
+  <section id="home" class="hero">
+    <div class="container">
+      <h1>Josh Hiller: Software Engineer with a focus on Quantum Computing</h1>
+      <p class="lead">
+        Building robust software solutions for today’s problems while exploring the next generation of quantum algorithms.
+      </p>
+      <div class="btn-row" style="justify-content:center; margin-top:10px;">
+        <a href="#projects" class="btn btn-dark">View My Projects</a>
+        <a href="/resume/Josh_Hiller_Resume.pdf" target="_blank" rel="noopener" class="btn btn-primary">Download Resume</a>
+        <a href="#about" class="btn btn-ghost">About Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="h1 mb-sm">Projects</h2>
+
+      <h3 class="mb-sm">Quantum Computing</h3>
+      <div class="grid">
+        {quantum.map(({ slug, data }) => (
+          <a href={`/projects/${slug}/`} class="card-link">
+            <img src={data.image} alt={data.title} loading="lazy" />
+            <div style="padding:16px 16px 18px;">
+              <div class="muted mb-xs">{data.category}</div>
+              <h4 style="margin:0 0 6px;font-size:1.1rem;">{data.title}</h4>
+              <p class="muted" style="line-height:1.45;">{data.summary}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <h3 class="mt-md mb-sm">Software Engineering</h3>
+      <div class="grid">
+        {software.map(({ slug, data }) => (
+          <a href={`/projects/${slug}/`} class="card-link">
+            <img src={data.image} alt={data.title} loading="lazy" />
+            <div style="padding:16px 16px 18px;">
+              <div class="muted mb-xs">{data.category}</div>
+              <h4 style="margin:0 0 6px;font-size:1.1rem;">{data.title}</h4>
+              <p class="muted" style="line-height:1.45;">{data.summary}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="h1 mb-sm">About Me</h2>
+      <div class="card">
+        <p>
+          I’m Josh Hiller, a software engineer and physics student focused on quantum computing.
+          I enjoy building robust software and exploring algorithms for near-term and future quantum devices.
+          Recent work includes Qiskit-based projects, computational physics simulations, and Manim visualizations.
+        </p>
+        <p>
+          I’m interested in roles that blend systems thinking with applied research—developer tooling,
+          simulation frameworks, or quantum applications.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT (Netlify form, no backend needed) -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="h1 mb-sm">Contact</h2>
+      <form name="contact" method="POST" data-netlify="true" class="card" style="max-width:720px;">
+        <input type="hidden" name="form-name" value="contact" />
+        <label>Name<br/><input name="name" required style="width:100%;padding:10px;border-radius:10px;border:none;margin:6px 0 12px;background:#0b1220;color:#e5e7eb"/></label>
+        <label>Email<br/><input name="email" type="email" required style="width:100%;padding:10px;border-radius:10px;border:none;margin:6px 0 12px;background:#0b1220;color:#e5e7eb"/></label>
+        <label>Message<br/><textarea name="message" rows="6" required style="width:100%;padding:10px;border-radius:10px;border:none;margin:6px 0 12px;background:#0b1220;color:#e5e7eb"></textarea></label>
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+
+      <p class="muted mt-md">
+        Or reach me at <a class="link" href="mailto:your.email@example.com">your.email@example.com</a>
+        · <a class="link" href="https://github.com/hillerj1" target="_blank" rel="noopener">GitHub</a>
+        · <a class="link" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+    </div>
+  </section>
+</Layout>
