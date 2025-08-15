@@ -11,8 +11,9 @@ const projects = defineCollection({
     techstack: z.array(z.string()),
     github: z.string().url(),
     demo: z.string().url().optional().or(z.literal('')),
-    image: z.string(), // path in /public
+    image: z.string(),        // path under /public
     date: z.string().optional(),
+    group: z.enum(['Software', 'Quantum']), // <— add this line
   }),
 });
 

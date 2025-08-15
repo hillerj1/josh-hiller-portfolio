@@ -8,6 +8,7 @@ techstack: ["Qiskit", "Python", "Jupyter", "IBM Quantum API", "Git"]
 github: "https://github.com/hillerj1/qiskit-certs"
 demo: ""
 image: "/assets/projects/qiskit-certs.png"
+group: "Quantum"
 ---
 ## What I did
 - Implemented circuits and workflows mirroring certification objectives…

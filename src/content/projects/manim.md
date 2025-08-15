@@ -9,6 +9,7 @@ github: "https://github.com/hillerj1/manim"
 demo: ""
 image: "/assets/projects/manim.png"
 date: "2025-02-10"
+group: "Software"
 ---
 
 ## Highlights
