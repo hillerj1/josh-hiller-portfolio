@@ -2,58 +2,33 @@
 import '../styles/global.css';
 const { title = "Josh Hiller — Portfolio", description = "Software engineer focused on quantum computing." } = Astro.props;
 ---
-
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>{title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <link rel="icon" href="/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <nav class="nav">
       <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:100%;">
-        <a href="#home" style="font-weight:600;text-decoration:none;">JH</a>
+        <a href="/#home" class="brand" style="text-decoration:none;">Josh Hiller</a>
         <div style="display:flex;gap:6px;">
-          <a href="#home">Home</a>
-          <a href="#projects">Projects</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+          <a href="/#home">Home</a>
+          <a href="/#projects">Projects</a>
+          <a href="/#about">About</a>
+          <a href="/#contact">Contact</a>
           <a href="/resume/Josh_Hiller_Resume.pdf" target="_blank" rel="noopener">Resume</a>
         </div>
       </div>
     </nav>
 
+    <!-- exactly ONE slot -->
     <slot />
 
     <footer style="text-align:center;padding:24px;opacity:.7;">
       <small>© {new Date().getFullYear()} Josh Hiller</small>
     </footer>
   </body>
-    <body>
-    <!-- Fixed background video -->
-    <video
-      id="bg-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      poster="/assets/hero-poster.jpg"
-      preload="auto"
-    >
-      <source src="/assets/hero-bg.webm" type="video/webm" />
-      <source src="/assets/hero-bg.mp4" type="video/mp4" />
-    </video>
-    <div class="bg-overlay"></div>
-
-    <nav class="nav">
-      <!-- ... your existing nav ... -->
-    </nav>
-
-    <slot />
-
-    <footer><!-- ... --></footer>
-  </body>
-
 </html>
