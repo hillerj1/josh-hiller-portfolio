@@ -1,5 +1,8 @@
 ---
 const { title = "Josh Hiller — Portfolio" } = Astro.props;
+const current = Astro.url.pathname;
+const active = (href: string) =>
+  current === href || (href !== '/' && current.startsWith(href)) ? 'background:#e2e8f0;' : '';
 ---
 
 <html lang="en">
@@ -8,7 +11,7 @@ const { title = "Josh Hiller — Portfolio" } = Astro.props;
     <title>{title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      :root { --bg:#f8fafc; --fg:#0f172a; --card:#ffffff; }
+      :root { --bg:#f8fafc; --fg:#0f172a; }
       body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; color:var(--fg); background:var(--bg); }
       a { color:inherit; }
       .container { max-width:1100px; margin:0 auto; padding:0 20px; }
@@ -21,14 +24,17 @@ const { title = "Josh Hiller — Portfolio" } = Astro.props;
       <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:52px;">
         <a href="/" style="font-weight:600;">JH</a>
         <div style="display:flex;gap:6px;">
-          <a href="/projects">Projects</a>
-          <a href="/about">About</a>
-          <a href="/contact">Contact</a>
+          <a href="/" style={active('/')}>Home</a>
+          <a href="/projects" style={active('/projects')}>Projects</a>
+          <a href="/about" style={active('/about')}>About</a>
+          <a href="/contact" style={active('/contact')}>Contact</a>
           <a href="/resume/Josh_Hiller_Resume.pdf" target="_blank" rel="noopener">Resume</a>
         </div>
       </div>
     </nav>
+
     <slot />
+
     <footer style="text-align:center;padding:24px;opacity:.6;">
       <small>© {new Date().getFullYear()} Josh Hiller</small>
     </footer>
