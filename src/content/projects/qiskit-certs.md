@@ -44,9 +44,9 @@ group: "Quantum"
 ## Results / Artifacts
 
 - **Certificates (Feb 2025)**:  
-  • Basics of Quantum Information — [View certificate](<ADD_LINK>)  
-  • Practical Intro to Quantum-Safe Cryptography — [View certificate](<ADD_LINK>)  
-  • Variational Algorithm Design — [View certificate](<ADD_LINK>)
+  • Basics of Quantum Information — For certificate see certifications tab  
+  • Practical Intro to Quantum-Safe Cryptography — For certificate see certifications tab  
+  • Variational Algorithm Design — For certificate see certifications tab
 
 - **Repository**: source notebooks/scripts with step-by-step commentary and saved plots.  
 - **Takeaways**: clearer intuition for parameterized circuits & optimizer behavior; practical sense of transpilation/ noise impacts; a starting toolkit for quantum-safe migration conversations.

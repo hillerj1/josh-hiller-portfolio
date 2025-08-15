@@ -1,9 +1,9 @@
 ---
-title: "SCUBA"
-issuer: "Amazon Web Services"
-date: "2024-08-01"
+title: "Advanced Open Water Scuba Diver"
+issuer: "PADI"
+date: "12-20-2019"
 #credentialId: ""
 #verifyUrl: ""
-skills: ["AWS Fundamentals", "Cloud Economics", "Security"]
-image: "/assets/certs/aws-clf.png"
+skills: ["Communication", "Problem-Solving"]
+image: "/src/content/certifications/scuba.png"
 ---

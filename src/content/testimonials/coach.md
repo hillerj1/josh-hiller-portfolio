@@ -1,9 +1,9 @@
 ---
 quote: "blah blah blah."
-author: "Prof. [Name]"
-role: "Department of Physics"
+author: "Molly Chamberlin"
+role: "Men's and Women's Swimming and Diving Head Coach"
 org: "Union College"
-#link: ""
-avatar: "/assets/people/prof-placeholder.jpg"
-date: "2025-04-10"
+link: "https://unionathletics.com/staff-directory/molly-chamberlain/312"
+avatar: "/src/content/testimonials/coach.png"
+date: "08-14-2025"
 ---

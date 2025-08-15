@@ -19,7 +19,7 @@ const quotes = (await getCollection('testimonials')).sort((a,b)=>(b.data.date??'
     <h1 class="hero-title">Josh Hiller</h1>
 
     <p class="subtitle">
-      Actively seeking roles in software engineering, quantum computing, or related fields.
+      Actively seeking roles in software engineering, software developing, cybersecurity, quantum computing, or related fields.
     </p>
 
     <div class="scroll-cue" aria-hidden="true">
@@ -87,7 +87,7 @@ const quotes = (await getCollection('testimonials')).sort((a,b)=>(b.data.date??'
               </ul>
             ) : null}
             <div style="display:flex;gap:10px;margin-top:8px;">
-              {data.verifyUrl ? <a href={data.verifyUrl} target="_blank" rel="noopener" class="link">Verify</a> : null}
+              {data.verifyUrl ? <a href={data.verifyUrl} target="_blank" rel="noopener" class="link">Verification</a> : null}
               {data.credentialId ? <span class="muted">ID: {data.credentialId}</span> : null}
             </div>
           </div>
@@ -126,22 +126,51 @@ const quotes = (await getCollection('testimonials')).sort((a,b)=>(b.data.date??'
 
 
   <!-- ABOUT -->
-  <section id="about" class="section">
-    <div class="container">
-      <h2 class="h1 mb-sm">About Me</h2>
-      <div class="card">
-        <p>
-          I’m Josh Hiller, a software engineer and physics student focused on quantum computing.
-          I enjoy building robust software and exploring algorithms for near-term and future quantum devices.
-          Recent work includes Qiskit-based projects, computational physics simulations, and Manim visualizations.
-        </p>
-        <p>
-          I’m interested in roles that blend systems thinking with applied research—developer tooling,
-          simulation frameworks, or quantum applications.
-        </p>
-      </div>
+<section id="about" class="section">
+  <div class="container">
+    <h2 class="h1 mb-sm">About Me</h2>
+
+    <div class="card">
+      <p>
+        I’m Josh Hiller — a Union College physics student (CS minor) who likes building software,
+        running experiments, and turning hard ideas into clear explanations.
+      </p>
+
+      <p>
+        <strong>Science & tech:</strong> I’ve worked on a parametric down-conversion setup for
+        single-photon experiments (tightened the apparatus, sped up Python data collection/processing);
+        built computational physics simulations (PHY 310); and created Manim visuals. I also earned
+        three IBM Quantum credentials in Feb 2025 (Basics of Quantum Information, Practical Intro to
+        Quantum-Safe Cryptography, Variational Algorithm Design).
+      </p>
+
+      <ul style="margin:0 0 12px 18px; line-height:1.6;">
+        <li><strong>Industry:</strong> Software Developer Intern @ Sigma Software (Python, collaboration, delivery).</li>
+        <li><strong>Quantum/Algorithms:</strong> Qiskit circuits, variational workflows, simulator vs. hardware comparisons.</li>
+      </ul>
+
+      <p>
+        <strong>What I’m looking for:</strong> roles where I can ship real software (data/infra, simulation, dev tools)
+        and keep a foot in quantum (algorithms, simulation, education, or platform tooling). I like teams that mentor,
+        measure outcomes, and write things down.
+      </p>
+
+      <p>
+        <strong>Outside the lab:</strong> Team captain for Union Men’s Swimming & Diving (SAAC member), campus tour guide,
+        and community volunteer. (See Linkedin Below)
+      </p>
     </div>
-  </section>
+
+    <!-- Optional photo row (replace images with your own or remove this block) -->
+    <div class="photo-row" style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;">
+      <img src="/src/pages/swim-1.png" alt="Training" style="width:100%; max-width:360px; border-radius:12px; box-shadow:var(--shadow);" loading="lazy" />
+      <img src="/src/pages/hiking.png" alt="Hiking" style="width:100%; max-width:360px; border-radius:12px; box-shadow:var(--shadow);" loading="lazy" />
+      <img src="/src/pages/hiking2.png" alt="Hiking" style="width:100%; max-width:360px; border-radius:12px; box-shadow:var(--shadow);" loading="lazy" />
+	  <img src="/public/headshot.jpeg" alt="Headshot" style="width:100%; max-width:360px; border-radius:12px; box-shadow:var(--shadow);" loading="lazy" />
+    </div>
+  </div>
+</section>
+
 
   <!-- CONTACT (Netlify form, no backend needed) -->
   <section id="contact" class="section">
@@ -156,9 +185,9 @@ const quotes = (await getCollection('testimonials')).sort((a,b)=>(b.data.date??'
       </form>
 
       <p class="muted mt-md">
-        Or reach me at <a class="link" href="mailto:your.email@example.com">your.email@example.com</a>
+        Or reach me at <a class="link" href="joshhiller8@gmail.com">joshhiller8@gmail.com</a>
         · <a class="link" href="https://github.com/hillerj1" target="_blank" rel="noopener">GitHub</a>
-        · <a class="link" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener">LinkedIn</a>
+        · <a class="link" href="https://www.linkedin.com/in/joshua-hiller-58m/" target="_blank" rel="noopener">LinkedIn</a>
       </p>
     </div>
   </section>

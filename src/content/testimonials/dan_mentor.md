@@ -1,5 +1,5 @@
 ---
-quote: "dan kusel..."
+quote: "dan?..."
 author: "[Manager Name]"
 role: "Engineering Manager"
 org: "[Company]"
