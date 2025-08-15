@@ -11,10 +11,36 @@ const projects = defineCollection({
     techstack: z.array(z.string()),
     github: z.string().url(),
     demo: z.string().url().optional().or(z.literal('')),
-    image: z.string(),        // path under /public
+    image: z.string(),
     date: z.string().optional(),
-    group: z.enum(['Software', 'Quantum']), // <— add this line
+    group: z.enum(['Software', 'Quantum']),
   }),
 });
 
-export const collections = { projects };
+const certifications = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    issuer: z.string(),
+    date: z.string().optional(),           // <-- make optional
+    credentialId: z.string().optional(),
+    verifyUrl: z.string().url().optional(),
+    skills: z.array(z.string()).optional(),
+    image: z.string().optional(),
+  }),
+});
+
+const testimonials = defineCollection({
+  type: 'content',
+  schema: z.object({
+    quote: z.string(),
+    author: z.string(),
+    role: z.string().optional(),
+    org: z.string().optional(),
+    link: z.string().url().optional(),
+    avatar: z.string().optional(),
+    date: z.string().optional(),
+  }),
+});
+
+export const collections = { projects, certifications, testimonials };

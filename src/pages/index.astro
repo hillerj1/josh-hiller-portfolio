@@ -7,6 +7,9 @@ const software = all.filter((p) => p.data.group === 'Software')
   .sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
 const quantum = all.filter((p) => p.data.group === 'Quantum')
   .sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
+  /* NEW */
+const certs = (await getCollection('certifications')).sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
+const quotes = (await getCollection('testimonials')).sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
 ---
 
 <Layout title="Josh Hiller — Portfolio">
@@ -63,6 +66,64 @@ const quantum = all.filter((p) => p.data.group === 'Quantum')
       </div>
     </div>
   </section>
+
+  <!-- CERTIFICATIONS -->
+<section id="certifications" class="section">
+  <div class="container">
+    <h2 class="h1 mb-sm">Certifications</h2>
+    <div class="grid">
+      {certs.map(({ data }) => (
+        <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+          {data.image ? <img src={data.image} alt={data.title} style="width:56px;height:56px;object-fit:contain;border-radius:10px;" /> : null}
+          <div style="flex:1;">
+            <div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;">
+              <strong>{data.title}</strong>
+              <span class="muted">· {data.issuer}</span>
+            </div>
+            {data.date ? <div class="muted" style="font-size:.9rem;margin-top:4px;">{data.date}</div> : null}
+            {data.skills?.length ? (
+              <ul class="tag-list" style="margin-top:8px;">
+                {data.skills.map((s) => <li class="tag">{s}</li>)}
+              </ul>
+            ) : null}
+            <div style="display:flex;gap:10px;margin-top:8px;">
+              {data.verifyUrl ? <a href={data.verifyUrl} target="_blank" rel="noopener" class="link">Verify</a> : null}
+              {data.credentialId ? <span class="muted">ID: {data.credentialId}</span> : null}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section">
+  <div class="container">
+    <h2 class="h1 mb-sm">Testimonials</h2>
+    <div class="grid">
+      {quotes.map(({ data }) => (
+        <blockquote class="card" style="margin:0;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;">
+          {data.avatar ? <img src={data.avatar} alt={data.author} style="width:56px;height:56px;border-radius:50%;object-fit:cover;" /> : null}
+          <div>
+            <p style="margin:0 0 8px;line-height:1.5;">“{data.quote}”</p>
+            <footer class="muted" style="font-size:.95rem;">
+              — {data.author}
+              {data.role ? `, ${data.role}` : ''}{data.org ? `, ${data.org}` : ''}
+              {data.link ? (
+                <>
+                  {' · '}
+                  <a href={data.link} class="link" target="_blank" rel="noopener">Profile</a>
+                </>
+              ) : null}
+            </footer>
+          </div>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>
+
 
   <!-- ABOUT -->
   <section id="about" class="section">
