@@ -1,0 +1,48 @@
+---
+import { getEntryBySlug } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const { slug } = Astro.params;
+const project = await getEntryBySlug('projects', slug!);
+if (!project) {
+  throw new Error(`Project not found: ${slug}`);
+}
+const { Content } = await project.render();
+const d = project.data;
+---
+
+<Layout title={`${d.title} — Josh Hiller`}>
+  <main style="max-width:900px;margin:0 auto;padding:28px 20px 60px;">
+    <p style="margin:0 0 16px;"><a href="/" style="text-decoration:none;color:#2563eb;">← Back</a></p>
+
+    <img src={d.image} alt={d.title} style="width:100%;border-radius:16px;object-fit:cover;aspect-ratio:16/9;box-shadow:0 10px 28px rgba(0,0,0,.12);" />
+    <h1 style="margin:20px 0 6px;font-size:2rem;">{d.title}</h1>
+    <div style="opacity:.7;margin-bottom:14px;">{d.category}</div>
+    <p style="margin:0 0 18px;font-size:1.05rem;opacity:.9;">{d.summary}</p>
+
+    <ul style="list-style:none;padding:0;margin:0 0 18px;display:flex;flex-wrap:wrap;gap:8px;">
+      {d.techstack.map((t) => (
+        <li style="padding:6px 10px;border-radius:999px;background:#e2e8f0;font-size:.85rem;">{t}</li>
+      ))}
+    </ul>
+
+    <div style="display:flex;gap:12px;margin:0 0 24px;">
+      <a href={d.github} target="_blank" rel="noopener" style="text-decoration:none;background:#111827;color:#fff;padding:10px 14px;border-radius:10px;">GitHub Repo</a>
+      {d.demo && d.demo.length > 0 ? (
+        <a href={d.demo} target="_blank" rel="noopener" style="text-decoration:none;background:#2563eb;color:#fff;padding:10px 14px;border-radius:10px;">Live Demo / Paper / Video</a>
+      ) : null}
+    </div>
+
+    <article style="background:#fff;border-radius:16px;padding:22px;box-shadow:0 6px 22px rgba(0,0,0,.08);">
+      <h2>Problem</h2>
+      <p>{d.problem}</p>
+      <h2>Solution</h2>
+      <p>{d.solution}</p>
+
+      {/* Optional extra body content from the Markdown file */}
+      <section style="margin-top:18px;">
+        <Content />
+      </section>
+    </article>
+  </main>
+</Layout>
