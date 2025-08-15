@@ -3,8 +3,8 @@
 > **Work in Progress.** This is my personal portfolio site built with Astro. I’m building it in public; expect frequent updates.
 
 **Live URLs**
-- Primary (custom domain): https://joshhiller.com *(once DNS is connected)*
-- Preview (Netlify): https://<your-site>.netlify.app
+- Primary (custom domain): https://josh-hiller.com *(once DNS is connected)*
+- Preview (Netlify): https://josh-hiller-portfolio.netlify.app
 
 ---
 
@@ -66,7 +66,7 @@ summary: "One-sentence summary of what the project does."
 problem: "What problem were you addressing?"
 solution: "How you solved it / what you built."
 techstack: ["Python", "Qiskit", "React", "AWS"]  # array of strings
-github: "https://github.com/your/repo"
+github: "https://github.com/hillerj/josh-hiller-portfolio"
 demo: ""        # optional: live demo / paper / video URL ("" if none)
 image: "/assets/projects/<file>.png"   # path under /public
 date: "2025-05-01"                     # optional, used for sorting
