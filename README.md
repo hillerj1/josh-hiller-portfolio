@@ -1,46 +1,74 @@
-# Astro Starter Kit: Basics
+# Josh Hiller — Portfolio
 
-```sh
-npm create astro@latest -- --template basics
-```
+> **Work in Progress.** This is my personal portfolio site built with Astro. I’m building it in public; expect frequent updates.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**Live URLs**
+- Primary (custom domain): https://joshhiller.com *(once DNS is connected)*
+- Preview (Netlify): https://<your-site>.netlify.app
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## Tech Stack
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+- **Astro** (content collections)
+- **TypeScript/JavaScript**
+- **Markdown** for project case studies
+- **Deployed on Netlify**
+- Assets from `/public`
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+---
 
-## 🧞 Commands
+## Project Structure
 
-All commands are run from the root of the project, from a terminal:
+.
+├─ public/
+│  ├─ assets/
+│  │  ├─ hero-bg.jpg               # homepage hero background
+│  │  └─ projects/
+│  │     ├─ qiskit-certs.png
+│  │     ├─ phy-310.png
+│  │     └─ manim.png
+│  └─ resume/
+│     └─ Josh_Hiller_Resume.pdf
+├─ src/
+│  ├─ components/
+│  │  └─ Welcome.astro             # hero section on Home
+│  ├─ content/
+│  │  ├─ config.ts                 # content collection schema
+│  │  └─ projects/
+│  │     ├─ qiskit-certs.md
+│  │     ├─ phy-310.md
+│  │     └─ manim.md
+│  ├─ layouts/
+│  │  └─ Layout.astro              # site-wide nav + shell
+│  └─ pages/
+│     ├─ index.astro               # Home (hero only)
+│     ├─ about.astro
+│     ├─ contact.astro
+│     └─ projects/
+│        ├─ index.astro            # Projects index (two categories)
+│        └─ [slug].astro           # Dynamic project detail page
+├─ package.json
+└─ astro.config.mjs
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+---
 
-## 👀 Want to learn more?
+## Content Model (Projects)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Defined in `src/content/config.ts`.  
+Each project Markdown file must include this **frontmatter**:
+
+```yaml
+---
+title: "Title of Project"
+category: "Quantum Computing" # or "Computational Physics", etc.
+summary: "One-sentence summary of what the project does."
+problem: "What problem were you addressing?"
+solution: "How you solved it / what you built."
+techstack: ["Python", "Qiskit", "React", "AWS"]  # array of strings
+github: "https://github.com/your/repo"
+demo: ""        # optional: live demo / paper / video URL ("" if none)
+image: "/assets/projects/<file>.png"   # path under /public
+date: "2025-05-01"                     # optional, used for sorting
+group: "Software"                      # or "Quantum" (required)
+---
