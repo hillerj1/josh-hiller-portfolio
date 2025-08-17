@@ -334,3 +334,97 @@ img{ max-width:100%; display:block; }
   background: #60a5fa; /* accent */
   box-shadow: 0 0 0 1px rgba(0,0,0,.15), inset 0 0 0 1px rgba(255,255,255,.2);
 }
+
+/* Timeline */
+.timeline{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-direction:column; gap:14px;
+  position:relative;
+}
+.tl-item{ position:relative; padding:16px 16px 12px; }
+
+.tl-meta{ display:flex; align-items:flex-start; gap:12px; margin-bottom:8px; }
+.tl-logo{
+  width:36px; height:36px; border-radius:8px; object-fit:contain;
+  box-shadow: var(--shadow);
+}
+.tl-dot{
+  width:14px; height:14px; border-radius:50%;
+  background:#60a5fa; margin-top:4px; box-shadow:0 0 0 3px rgba(96,165,250,.25);
+}
+.tl-role{ font-weight:700; }
+.tl-company{ opacity:.95; }
+.tl-dates{ font-size:.9rem; }
+
+.tl-bullets{ margin: 6px 0 0 18px; }
+.tl-bullets li{ margin: 4px 0; line-height:1.5; }
+
+/* Optional vertical line */
+.timeline:before{
+  content:""; position:absolute; left:18px; top:0; bottom:0;
+  width:2px; background:linear-gradient(180deg, rgba(96,165,250,.35), rgba(96,165,250,0));
+  pointer-events:none;
+}
+.tl-item{ padding-left:28px; }
+.tl-meta{ margin-left:-10px; }
+
+/* Carousel shell */
+/* Carousel shell */
+.xp-carousel{ position:relative; }
+
+/* BIGGER arrows */
+.xp-nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:56px; height:56px; border-radius:50%;
+  background:rgba(17,24,39,.8); color:#fff; border:0;
+  display:grid; place-items:center; cursor:pointer;
+  font-size:28px; line-height:1; user-select:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.28);
+  backdrop-filter: blur(6px);
+  z-index:2;
+}
+.xp-nav:hover{ background:rgba(37,99,235,.95); }
+.xp-nav.prev{ left:-8px; }
+.xp-nav.next{ right:-8px; }
+
+/* Horizontal track (smooth & wide) */
+.xp-track{
+  list-style:none; margin:0; padding:8px 8px 16px;
+  display:grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(280px, 72vw, 520px);
+  gap:12px;
+  overflow-x:auto;
+  scroll-snap-type: x mandatory;   /* allows glide, still snaps gently */
+  scroll-padding-left: 8px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width:none;
+  will-change: scroll-position;
+}
+.xp-track::-webkit-scrollbar{ display:none; }
+
+/* Cards */
+.xp-card{ scroll-snap-align: start; }
+
+.xp-hint{
+  margin-top:10px; font-size:1rem; opacity:.9;
+  display:flex; align-items:center; gap:8px;
+}
+
+
+/* Cards */
+.xp-card{ scroll-snap-align: start; }
+.xp-meta{ display:flex; gap:12px; align-items:flex-start; margin-bottom:8px; }
+.xp-logo{ width:36px; height:36px; border-radius:8px; object-fit:contain; box-shadow:var(--shadow); }
+.xp-dot{ width:14px; height:14px; border-radius:50%; background:#60a5fa; margin-top:4px; box-shadow:0 0 0 3px rgba(96,165,250,.25); }
+.xp-role{ font-weight:700; }
+.xp-company{ opacity:.95; }
+.xp-dates{ font-size:.9rem; }
+.xp-bullets{ margin:6px 0 0 18px; }
+.xp-bullets li{ margin:4px 0; line-height:1.5; }
+
+/* Small screens: hide arrows (swipe) */
+@media (max-width: 720px){
+  .xp-nav{ display:none; }
+}
+

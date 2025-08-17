@@ -58,4 +58,21 @@ const testimonials = defineCollection({
   }),
 });
 
-export const collections = { projects, certifications, testimonials, skills};
+const experience = defineCollection({
+  type: 'content',
+  schema: z.object({
+    role: z.string(),
+    company: z.string(),
+    location: z.string().optional(),      // e.g., "New York, NY · Hybrid"
+    start: z.string(),                    // "2025-06" (YYYY-MM)
+    end: z.string().optional(),           // "2025-09" or "Present"
+    type: z.string().optional(),          // Internship, Part-time, Research, Seasonal
+    link: z.string().url().optional(),    // company or project link
+    logo: z.string().optional(),          // /assets/companies/*.png (under public/)
+    tech: z.array(z.string()).optional(), // ["Python","Git","Qiskit"]
+    bullets: z.array(z.string()),         // 2–4 concise impact bullets
+    order: z.number().optional(),         // force ordering if needed
+  }),
+});
+
+export const collections = { projects, certifications, testimonials, skills, experience};

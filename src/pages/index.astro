@@ -11,6 +11,13 @@ const quantum = all.filter((p) => p.data.group === 'Quantum')
 const certs = (await getCollection('certifications')).sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
 const quotes = (await getCollection('testimonials')).sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
 const skills = (await getCollection('skills')).sort((a,b) => (a.data.order ?? 999) - (b.data.order ?? 999));
+const xp = (await getCollection('experience')).sort((a, b) => {
+  const ao = a.data.order ?? Infinity;
+  const bo = b.data.order ?? Infinity;
+  if (ao !== bo) return ao - bo;
+  return (a.data.start ?? '').localeCompare(b.data.start ?? '');
+});
+
 ---
 
 <Layout title="Josh Hiller — Portfolio">
@@ -123,6 +130,148 @@ const skills = (await getCollection('skills')).sort((a,b) => (a.data.order ?? 99
       ))}
     </div>
   </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="container">
+    <h2 class="h1 mb-sm">Experience</h2>
+
+    <div class="xp-carousel">
+      <button class="xp-nav prev" aria-label="Previous experience" type="button">‹</button>
+
+      <ol class="xp-track" aria-label="Experience timeline">
+        {xp.map(({ data }) => (
+          <li class="xp-card card">
+            <div class="xp-meta">
+              {data.logo
+                ? <img src={data.logo} alt={data.company} class="xp-logo" width="36" height="36" loading="lazy" />
+                : <div class="xp-dot" aria-hidden="true" />}
+              <div class="xp-head">
+                <div class="xp-role">{data.role}</div>
+                <div class="xp-company">
+                  {data.link
+                    ? <a class="link" href={data.link} target="_blank" rel="noopener">{data.company}</a>
+                    : data.company}
+                  {data.location ? <span class="muted"> · {data.location}</span> : null}
+                </div>
+                <div class="xp-dates muted">{data.start} — {data.end ?? 'Present'}</div>
+              </div>
+            </div>
+
+            <ul class="xp-bullets">
+              {data.bullets.map((b) => <li>{b}</li>)}
+            </ul>
+
+            {data.tech?.length ? (
+              <ul class="tag-list" style="margin-top:8px;">
+                {data.tech.map((t) => <li class="tag">{t}</li>)}
+              </ul>
+            ) : null}
+          </li>
+        ))}
+      </ol>
+
+      <button class="xp-nav next" aria-label="Next experience" type="button">›</button>
+    </div>
+
+   <p class="xp-hint">Swipe or use the arrows</p>
+  </div>
+
+  <!-- tiny inline script to make the arrows scroll by one card -->
+ <script is:inline>
+  const container = document.currentScript?.previousElementSibling; // the .container
+  const carousel  = container?.querySelector('.xp-carousel');
+  const track     = carousel?.querySelector('.xp-track');
+  const prev      = carousel?.querySelector('.xp-nav.prev');
+  const next      = carousel?.querySelector('.xp-nav.next');
+
+  // Button step size = one card width (+ gap)
+  function step() {
+    const card = track?.querySelector('.xp-card');
+    if (!card) return 360;
+    const rect = card.getBoundingClientRect();
+    const styles = getComputedStyle(track);
+    const gap = parseFloat(styles.columnGap || styles.gap) || 12;
+    return rect.width + gap;
+  }
+
+  // Buttons (also pause autoplay briefly)
+  function pause(ms = 5000){ stop(); clearTimeout(resumeTimer); resumeTimer = setTimeout(play, ms); }
+  prev?.addEventListener('click', () => { track?.scrollBy({left:-step(), behavior:'smooth'}); pause(5000); });
+  next?.addEventListener('click', () => { track?.scrollBy({left: step(), behavior:'smooth'}); pause(5000); });
+
+  // --- AUTOPLAY (continuous) ---
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let rafId = 0, playing = false, resumeTimer = 0;
+  let speed = 1.2; // px per frame (~72px/s at 60fps). Increase if you want faster.
+
+  // Duplicate content to enable seamless loop
+  const origHTML = track?.innerHTML ?? '';
+  function primeLoop(){
+    if (!track) return;
+    track.innerHTML = origHTML + origHTML;           // duplicate once
+    track.scrollLeft = 0;
+  }
+
+  function loop(){
+    if (!playing || !track) return;
+    track.scrollLeft += speed;
+
+    // When we've scrolled past the first half (original set), jump back by that amount
+    const half = track.scrollWidth / 2;
+    if (track.scrollLeft >= half) {
+      track.scrollLeft -= half;
+    }
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function play(){
+    if (reduceMotion.matches || playing || !track) return;
+    playing = true;
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function stop(){
+    playing = false;
+    cancelAnimationFrame(rafId);
+  }
+
+  // Pause/resume on interaction
+  track?.addEventListener('mouseenter', () => stop());
+  track?.addEventListener('mouseleave', () => play());
+  track?.addEventListener('pointerdown', () => pause(7000));
+  track?.addEventListener('wheel', () => pause(4000));
+  track?.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') pause(6000);
+  });
+
+  // Start when section visible; stop when off-screen
+  const section = container?.closest('section');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { e.isIntersecting ? play() : stop(); });
+  }, { threshold: 0.15 });
+
+  // Prime & observe after layout
+  requestAnimationFrame(() => {
+    primeLoop();
+    if (section) io.observe(section);
+    // Fallback: if IO doesn't fire (already on screen), just start
+    if (section?.getBoundingClientRect().top < window.innerHeight) play();
+  });
+
+  // Respect reduced motion changes live
+  reduceMotion.addEventListener?.('change', () => { reduceMotion.matches ? stop() : play(); });
+
+  // Re-prime on resize (so card widths update)
+  let resizeTimer = 0;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { stop(); primeLoop(); play(); }, 200);
+  });
+</script>
+
 </section>
 
 <!-- TESTIMONIALS -->
