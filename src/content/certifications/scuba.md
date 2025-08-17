@@ -5,5 +5,5 @@ date: "12-20-2019"
 #credentialId: ""
 #verifyUrl: ""
 skills: ["Communication", "Problem-Solving"]
-image: "/src/content/certifications/scuba.png"
+image: "/public/assets/certs/scuba.png"
 ---
