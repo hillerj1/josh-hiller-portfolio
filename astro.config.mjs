@@ -3,9 +3,13 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
-  // if you set site elsewhere, keep it
   markdown: {
-    remarkPlugins: [remarkMath],
+    remarkPlugins: [[remarkMath, {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    }]],
     rehypePlugins: [rehypeKatex],
   },
+  // optional but nice:
+  // site: 'https://josh-hiller.com',
 });
