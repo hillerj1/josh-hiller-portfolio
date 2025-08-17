@@ -43,4 +43,19 @@ const testimonials = defineCollection({
   }),
 });
 
-export const collections = { projects, certifications, testimonials };
+    const skills = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(), // e.g., "Languages"
+    items: z.array(
+      z.object({
+        name: z.string(),              // "Python"
+        level: z.number().int().min(1).max(5), // 1–5
+        note: z.string().optional(),   // optional short note
+      })
+    ),
+    order: z.number().optional(),      // to control section order
+  }),
+});
+
+export const collections = { projects, certifications, testimonials, skills};

@@ -10,6 +10,7 @@ const quantum = all.filter((p) => p.data.group === 'Quantum')
   /* NEW */
 const certs = (await getCollection('certifications')).sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
 const quotes = (await getCollection('testimonials')).sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
+const skills = (await getCollection('skills')).sort((a,b) => (a.data.order ?? 999) - (b.data.order ?? 999));
 ---
 
 <Layout title="Josh Hiller — Portfolio">
@@ -66,6 +67,33 @@ const quotes = (await getCollection('testimonials')).sort((a,b)=>(b.data.date??'
       </div>
     </div>
   </section>
+  
+	<!-- SKILLS -->
+<section id="skills" class="section">
+  <div class="container">
+    <h2 class="h1 mb-sm">Skills</h2>
+    <div class="skills-grid">
+      {skills.map(({ data }) => (
+        <div class="skill-card card">
+          <h3 class="h3" style="margin:0 0 10px;">{data.title}</h3>
+          <ul class="skills-list">
+            {data.items.map((s) => (
+              <li class="skill-item">
+                <span class="skill-name">{s.name}</span>
+                <span class="skill-dots" aria-label={`Level ${s.level} of 5`}>
+                  {[1,2,3,4,5].map(n => (
+                    <span class={`dot ${n <= s.level ? 'on' : ''}`} />
+                  ))}
+                </span>
+                {s.note ? <span class="skill-note">{s.note}</span> : null}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
 
   <!-- CERTIFICATIONS -->
 <section id="certifications" class="section">
