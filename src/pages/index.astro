@@ -11,6 +11,7 @@ const quantum = all.filter((p) => p.data.group === 'Quantum')
 const certs = (await getCollection('certifications')).sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
 const quotes = (await getCollection('testimonials')).sort((a,b)=>(b.data.date??'').localeCompare(a.data.date??''));
 const skills = (await getCollection('skills')).sort((a,b) => (a.data.order ?? 999) - (b.data.order ?? 999));
+const edu = (await getCollection('education')).sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
 const xp = (await getCollection('experience')).sort((a, b) => {
   const ao = a.data.order ?? Infinity;
   const bo = b.data.order ?? Infinity;
@@ -273,6 +274,57 @@ const xp = (await getCollection('experience')).sort((a, b) => {
 </script>
 
 </section>
+  <!-- EDUCATION -->
+  <section id="education" class="section">
+    <div class="container">
+      <h2 class="h1 mb-sm">Education</h2>
+
+      <div class="education-grid">
+        {edu.map(({ data }) => (
+          <article class="education-card">
+            <div class="education-header">
+              {data.logo ? (
+                <img src={data.logo} alt={data.school} class="edu-logo" width="48" height="48" loading="lazy" />
+              ) : null}
+              <div class="education-info">
+                <h3 class="h3" style="margin:0;">
+                  {data.link ? (
+                    <a class="link" href={data.link} target="_blank" rel="noopener">{data.school}</a>
+                  ) : data.school}
+                </h3>
+                <div class="education-degree">
+                  {data.degree}
+                  {data.location ? ` · ${data.location}` : ''}
+                </div>
+                <div class="education-dates">
+                  {data.start} — {data.end ?? 'Present'}
+                  {data.gpa ? ` · GPA: ${data.gpa}` : null}
+                </div>
+              </div>
+            </div>
+
+            {data.highlights?.length ? (
+              <div class="education-highlights">
+                <div class="muted" style="font-size:.9rem;margin-bottom:6px;">Highlights:</div>
+                <ul class="highlights-list">
+                  {data.highlights.map((h) => <li>{h}</li>)}
+                </ul>
+              </div>
+            ) : null}
+
+            {data.coursework?.length ? (
+              <details class="coursework-details">
+                <summary class="link">Relevant coursework</summary>
+                <div class="coursework-grid">
+                  {data.coursework.map((c) => <span class="course-tag">{c}</span>)}
+                </div>
+              </details>
+            ) : null}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
 <!-- TESTIMONIALS -->
 <section id="testimonials" class="section">
@@ -368,4 +420,256 @@ const xp = (await getCollection('experience')).sort((a, b) => {
       </p>
     </div>
   </section>
+
+  <style>
+    /* Global Hover Effects for All Cards and Interactive Elements */
+    
+    /* All cards get hover effects */
+    .card, .card-link, .skill-card, .xp-card, blockquote.card {
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .card:hover, .card-link:hover, .skill-card:hover, .xp-card:hover, blockquote.card:hover {
+      border-color: var(--card-border-hover, #475569);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Project cards get special hover treatment */
+    .card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .card-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .card-link:hover img {
+      transform: scale(1.02);
+    }
+    
+    .card-link img {
+      transition: transform 0.3s ease;
+    }
+    
+    /* Skills cards */
+    .skill-card {
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .skill-card:hover {
+      background: var(--card-bg-hover, #2d3748);
+    }
+    
+    /* Experience cards */
+    .xp-card {
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .xp-card:hover {
+      background: var(--card-bg-hover, #2d3748);
+    }
+    
+    /* Certification cards */
+    .card[style*="display:flex;gap:14px"]:hover {
+      background: var(--card-bg-hover, #2d3748);
+    }
+    
+    /* Testimonial cards */
+    blockquote.card:hover {
+      background: var(--card-bg-hover, #2d3748);
+    }
+    
+    /* Tag hover effects */
+    .tag, .course-tag {
+      transition: all 0.2s ease;
+      cursor: default;
+    }
+    
+    .tag:hover, .course-tag:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      background: var(--tag-bg-hover, #4b5563);
+    }
+    
+    /* Button hover effects */
+    .btn {
+      transition: all 0.2s ease;
+    }
+    
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn-primary:hover {
+      background: var(--btn-primary-hover, #1d4ed8);
+    }
+    
+    /* Link hover effects */
+    .link {
+      transition: all 0.2s ease;
+    }
+    
+    .link:hover {
+      color: var(--link-hover, #60a5fa);
+      text-decoration: underline;
+    }
+    
+    /* Form input hover effects */
+    input, textarea {
+      transition: all 0.2s ease;
+    }
+    
+    input:focus, textarea:focus {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+      border-color: var(--accent-color, #3b82f6);
+    }
+    
+    /* Photo hover effects */
+    .photo img {
+      transition: all 0.3s ease;
+    }
+    
+    .photo:hover img {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Navigation arrows hover effects */
+    .xp-nav {
+      transition: all 0.2s ease;
+    }
+    
+    .xp-nav:hover {
+      background: var(--nav-hover, #374151);
+      transform: scale(1.1);
+    }
+    
+    /* Education Section Styles */
+    .education-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .education-card {
+      background: var(--card-bg, #1e293b);
+      border: 1px solid var(--card-border, #334155);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s ease;
+    }
+
+    .education-card:hover {
+      border-color: var(--card-border-hover, #475569);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .education-header {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .education-info {
+      flex: 1;
+    }
+
+    .education-degree {
+      color: var(--muted-color, #94a3b8);
+      font-size: 0.95rem;
+      margin: 4px 0;
+    }
+
+    .education-dates {
+      color: var(--muted-color, #94a3b8);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .education-highlights {
+      margin: 16px 0;
+      padding: 16px;
+      background: var(--highlights-bg, rgba(59, 130, 246, 0.1));
+      border-radius: 8px;
+      border-left: 3px solid var(--accent-color, #3b82f6);
+    }
+
+    .highlights-list {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.6;
+    }
+
+    .highlights-list li {
+      margin-bottom: 4px;
+    }
+
+    .coursework-details {
+      margin-top: 16px;
+    }
+
+    .coursework-details summary {
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--link-color, #3b82f6);
+      margin-bottom: 12px;
+    }
+
+    .coursework-details summary:hover {
+      text-decoration: underline;
+    }
+
+    .coursework-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .course-tag {
+      background: var(--tag-bg, #374151);
+      color: var(--tag-color, #e5e7eb);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      border: 1px solid var(--tag-border, #4b5563);
+    }
+
+    .edu-logo {
+      border-radius: 8px;
+      object-fit: contain;
+      background: var(--logo-bg, rgba(255, 255, 255, 0.05));
+      padding: 4px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .education-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      
+      .education-card {
+        padding: 20px;
+      }
+      
+      .education-header {
+        gap: 12px;
+      }
+    }
+  </style>
 </Layout>

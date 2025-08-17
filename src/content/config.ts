@@ -43,7 +43,7 @@ const testimonials = defineCollection({
   }),
 });
 
-    const skills = defineCollection({
+const skills = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(), // e.g., "Languages"
@@ -75,4 +75,21 @@ const experience = defineCollection({
   }),
 });
 
-export const collections = { projects, certifications, testimonials, skills, experience};
+const education = defineCollection({
+  type: 'content',
+  schema: z.object({
+    degree: z.string(),                   // e.g., "Bachelor of Science in Physics"
+    school: z.string(),                   // e.g., "Union College"
+    location: z.string().optional(),      // e.g., "Schenectady, NY"
+    start: z.string(),                    // "2021-09" (YYYY-MM)
+    end: z.string().optional(),           // "2025-05" or "Expected 2025"
+    gpa: z.string().optional(),           // e.g., "3.8/4.0"
+    logo: z.string().optional(),          // /assets/schools/*.png
+    link: z.string().url().optional(),    // school website
+    coursework: z.array(z.string()),      // notable courses
+    highlights: z.array(z.string()).optional(), // achievements, honors, activities
+    order: z.number().optional(),         // for custom ordering
+  }),
+});
+
+export const collections = { projects, certifications, testimonials, skills, experience, education};
