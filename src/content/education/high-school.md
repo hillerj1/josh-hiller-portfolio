@@ -1,14 +1,14 @@
 ---
 degree: "High School Diploma"
-school: "Your High School Name"
-location: "City, State"
-start: "2017-09"
-end: "2021-06"
+school: "John Jay High School  "
+location: "Cross River, NY"
+start: "09-2017"
+end: "06-2021"
 logo: "/assets/schools/high-school.png"
 coursework: [
   "AP Physics C: Mechanics",
-  "AP Calculus BC",
-  "AP Computer Science A",
+  "Honors Calculus",
+
   "Honors Chemistry",
   "Honors English"
 ]

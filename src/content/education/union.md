@@ -2,8 +2,8 @@
 degree: "Bachelor of Science in Physics"
 school: "Union College"
 location: "Schenectady, NY"
-start: "2021-09"
-end: "Expected 2026-06"
+start: "09-2021"
+end: "Expected 06-2026"
 logo: "/assets/companies/union.png"
 link: "https://www.union.edu"
 coursework: [
