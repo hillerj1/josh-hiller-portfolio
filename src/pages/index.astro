@@ -609,14 +609,28 @@ const xp = (await getCollection('experience')).sort((a, b) => {
       background: var(--card-bg-hover, #2d3748);
     }
     
-    /* Experience cards */
+    /* Experience cards - fit content better */
     .xp-card {
       border-radius: 12px;
       padding: 20px;
+      height: fit-content;
     }
     
     .xp-card:hover {
       background: var(--card-bg-hover, #2d3748);
+    }
+    
+    /* Make experience cards more compact on mobile */
+    @media (max-width: 768px) {
+      .xp-card {
+        padding: 16px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .xp-card {
+        padding: 14px;
+      }
     }
     
     /* Certification cards */

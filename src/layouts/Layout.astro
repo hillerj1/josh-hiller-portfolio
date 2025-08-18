@@ -36,7 +36,7 @@ const { title = "Josh Hiller — Portfolio", description = "Software engineer fo
   <div class="container" style="display:flex;align-items:center;justify-content:space-between;height:100%;">
     <!-- <a href="/#home" class="brand" style="text-decoration:none;">Josh Hiller</a> -->
 
-    <div style="display:flex;gap:6px;">
+    <div class="nav-links">
       <a href="/#home">Home</a>
       <a href="/#projects">Projects</a>
       <a href="/#skills">Skills</a>
@@ -96,6 +96,51 @@ const { title = "Josh Hiller — Portfolio", description = "Software engineer fo
 
       .back-to-top.visible {
         display: flex;
+      }
+
+      /* Navigation styles */
+      .nav-links {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .nav-links a {
+        white-space: nowrap;
+        font-size: 0.9rem;
+        padding: 6px 8px;
+      }
+
+      /* Mobile responsive navigation */
+      @media (max-width: 768px) {
+        .nav-links {
+          gap: 4px;
+          justify-content: center;
+          flex-wrap: wrap;
+          max-width: 100%;
+        }
+
+        .nav-links a {
+          font-size: 0.8rem;
+          padding: 4px 6px;
+          min-width: fit-content;
+        }
+
+        .container {
+          padding: 0 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-links {
+          gap: 2px;
+        }
+
+        .nav-links a {
+          font-size: 0.75rem;
+          padding: 3px 5px;
+        }
       }
 
       @media (max-width: 768px) {
