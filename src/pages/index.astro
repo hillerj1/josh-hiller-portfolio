@@ -456,12 +456,23 @@ const xp = (await getCollection('experience')).sort((a, b) => {
 <section id="testimonials" class="section">
   <div class="container">
     <h2 class="h1 mb-sm">Testimonials</h2>
-    <div class="grid">
+    
+    <!-- Work in Progress Message -->
+    <div class="work-in-progress-card">
+      <div class="wip-icon">🚧</div>
+      <div class="wip-content">
+        <h3>Work in Progress</h3>
+        <p>I've reached out to colleagues and mentors for testimonials. Check back soon to see what they have to say!</p>
+      </div>
+    </div>
+    
+    <!-- Original testimonials (hidden for now) -->
+    <div class="grid" style="display: none;">
       {quotes.map(({ data }) => (
         <blockquote class="card" style="margin:0;display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;">
           {data.avatar ? <img src={data.avatar} alt={data.author} style="width:56px;height:56px;border-radius:50%;object-fit:cover;" /> : null}
           <div>
-            <p style="margin:0 0 8px;line-height:1.5;">“{data.quote}”</p>
+            <p style="margin:0 0 8px;line-height:1.5;">"{data.quote}"</p>
             <footer class="muted" style="font-size:.95rem;">
               — {data.author}
               {data.role ? `, ${data.role}` : ''}{data.org ? `, ${data.org}` : ''}
@@ -1094,6 +1105,56 @@ const xp = (await getCollection('experience')).sort((a, b) => {
 
       .container {
         padding: 0 20px;
+      }
+    }
+
+    /* Work in Progress Card */
+    .work-in-progress-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 48px 32px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .wip-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .wip-content h3 {
+      margin: 0 0 16px 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .wip-content p {
+      margin: 0;
+      color: #94a3b8;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .work-in-progress-card {
+        padding: 32px 24px;
+      }
+
+      .wip-icon {
+        font-size: 2.5rem;
+      }
+
+      .wip-content h3 {
+        font-size: 1.3rem;
+      }
+
+      .wip-content p {
+        font-size: 1rem;
       }
     }
   </style>
