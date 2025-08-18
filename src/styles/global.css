@@ -265,7 +265,7 @@ img{ max-width:100%; display:block; }
   font-weight:1000;
   letter-spacing:.2px;
   line-height:1.04;
-  font-size: clamp(1rem, 10vw, 10rem) !important;
+  font-size: clamp(2.5rem, 6vw, 6rem) !important;
   margin:0 0 12px;
 }
 
