@@ -22,6 +22,9 @@ const xp = (await getCollection('experience')).sort((a, b) => {
 ---
 
 <Layout title="Josh Hiller — Portfolio">
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progress-bar"></div>
+  
   <!-- HOME / HERO -->
 	<section id="home" class="hero">
   <div class="container">
@@ -104,32 +107,45 @@ const xp = (await getCollection('experience')).sort((a, b) => {
     <div class="container">
       <h2 class="h1 mb-sm">Projects</h2>
 
-      <h3 class="mb-sm">Quantum Computing</h3>
-      <div class="grid">
-        {quantum.map(({ slug, data }) => (
-          <a href={`/projects/${slug}/`} class="card-link">
-            <img src={data.image} alt={data.title} loading="lazy" />
-            <div style="padding:16px 16px 18px;">
-              <div class="muted mb-xs">{data.category}</div>
-              <h4 style="margin:0 0 6px;font-size:1.1rem;">{data.title}</h4>
-              <p class="muted" style="line-height:1.45;">{data.summary}</p>
-            </div>
-          </a>
-        ))}
+      <!-- Project Filters -->
+      <div class="project-filters mb-sm">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="quantum">Quantum</button>
+        <button class="filter-btn" data-filter="software">Software</button>
       </div>
 
-      <h3 class="mt-md mb-sm">Software Engineering</h3>
-      <div class="grid">
-        {software.map(({ slug, data }) => (
-          <a href={`/projects/${slug}/`} class="card-link">
-            <img src={data.image} alt={data.title} loading="lazy" />
-            <div style="padding:16px 16px 18px;">
-              <div class="muted mb-xs">{data.category}</div>
-              <h4 style="margin:0 0 6px;font-size:1.1rem;">{data.title}</h4>
-              <p class="muted" style="line-height:1.45;">{data.summary}</p>
-            </div>
-          </a>
-        ))}
+      <div class="projects-container">
+        <div class="project-section" data-category="quantum">
+          <h3 class="mb-sm">Quantum Computing</h3>
+          <div class="grid">
+            {quantum.map(({ slug, data }) => (
+              <a href={`/projects/${slug}/`} class="card-link">
+                <img src={data.image} alt={data.title} loading="lazy" />
+                <div style="padding:16px 16px 18px;">
+                  <div class="muted mb-xs">{data.category}</div>
+                  <h4 style="margin:0 0 6px;font-size:1.1rem;">{data.title}</h4>
+                  <p class="muted" style="line-height:1.45;">{data.summary}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div class="project-section" data-category="software">
+          <h3 class="mt-md mb-sm">Software Engineering</h3>
+          <div class="grid">
+            {software.map(({ slug, data }) => (
+              <a href={`/projects/${slug}/`} class="card-link">
+                <img src={data.image} alt={data.title} loading="lazy" />
+                <div style="padding:16px 16px 18px;">
+                  <div class="muted mb-xs">{data.category}</div>
+                  <h4 style="margin:0 0 6px;font-size:1.1rem;">{data.title}</h4>
+                  <p class="muted" style="line-height:1.45;">{data.summary}</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -498,7 +514,7 @@ const xp = (await getCollection('experience')).sort((a, b) => {
 
     <div class="card">
       <p>
-        I’m Josh Hiller — a Union College physics student  who likes building software,
+        I’m a student Union College studying physics who likes building software,
         running experiments, and turning hard ideas into clear explanations.
       </p>
 
@@ -517,8 +533,7 @@ const xp = (await getCollection('experience')).sort((a, b) => {
 
       <p>
         <strong>What I’m looking for:</strong> roles where I can ship real software (data/infra, simulation, dev tools)
-        and keep a foot in quantum (algorithms, simulation, education, or platform tooling). I like teams that mentor,
-        measure outcomes, and write things down.
+        and keep a foot in quantum (algorithms, simulation, education, or platform tooling).
       </p>
 
       <p>
@@ -557,6 +572,13 @@ const xp = (await getCollection('experience')).sort((a, b) => {
       </p>
     </div>
   </section>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+  </button>
 
   <style>
     /* Global Hover Effects for All Cards and Interactive Elements */
@@ -1046,6 +1068,94 @@ const xp = (await getCollection('experience')).sort((a, b) => {
       transform: translateY(-1px);
     }
 
+    /* Project Filters */
+    .project-filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border: 1px solid #4b5563;
+      border-radius: 8px;
+      background: #1f2937;
+      color: #e5e7eb;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .filter-btn:hover {
+      background: #374151;
+      border-color: #6b7280;
+    }
+
+    .filter-btn.active {
+      background: #3b82f6;
+      border-color: #3b82f6;
+      color: white;
+    }
+
+    .projects-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .project-section {
+      display: block; /* Show all sections by default */
+    }
+
+    .project-section.hidden {
+      display: none; /* Hide sections when filtered */
+    }
+
+    /* Remove the default hiding since we want all visible initially */
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: rgba(59, 130, 246, 0.9);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .back-to-top:hover {
+      background: rgba(59, 130, 246, 1);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+    }
+
+    .back-to-top.visible {
+      display: flex;
+    }
+
+    @media (max-width: 768px) {
+      .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+      }
+    }
+
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .education-grid {
@@ -1171,5 +1281,121 @@ const xp = (await getCollection('experience')).sort((a, b) => {
         font-size: 1rem;
       }
     }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      background: linear-gradient(to right, #3b82f6, #1d4ed8);
+      z-index: 1000;
+      width: 0%;
+      transition: width 0.3s ease-in-out;
+    }
+
+    /* Enhanced card animations */
+    .card, .card-link, .skill-card, .xp-card {
+      opacity: 1; /* Show all cards by default */
+      transform: translateY(0); /* Reset transform */
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .card.animate, .card-link.animate, .skill-card.animate, .xp-card.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
+
+  <script>
+    // Progress bar functionality
+    const progressBar = document.getElementById('progress-bar') as HTMLElement;
+    
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.body.offsetHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      
+      if (progressBar) {
+        progressBar.style.width = scrollPercent + '%';
+      }
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = anchor.getAttribute('href');
+        if (href) {
+          const target = document.querySelector(href) as HTMLElement;
+          if (target) {
+            const navHeight = (document.querySelector('.nav') as HTMLElement)?.offsetHeight || 0;
+            const targetPosition = target.offsetTop - navHeight - 20;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).style.opacity = '1';
+          (entry.target as HTMLElement).style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all cards for fade-in animation (but not experience cards)
+    document.querySelectorAll('.card:not(.xp-card), .card-link, .skill-card').forEach(el => {
+      (el as HTMLElement).style.opacity = '0';
+      (el as HTMLElement).style.transform = 'translateY(20px)';
+      (el as HTMLElement).style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Project Filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectSections = document.querySelectorAll('.project-section');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const filter = (button as HTMLElement).dataset.filter;
+        projectSections.forEach(section => {
+          if (filter === 'all' || (section as HTMLElement).dataset.category === filter) {
+            section.classList.remove('hidden');
+          } else {
+            section.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Back to Top Button
+    const backToTopButton = document.querySelector('.back-to-top') as HTMLElement;
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) { // Show button when scrolled past 300px
+        backToTopButton.classList.add('visible');
+      } else {
+        backToTopButton.classList.remove('visible');
+      }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
 </Layout>

@@ -49,6 +49,23 @@ const { title = "Josh Hiller — Portfolio", description = "Software engineer fo
       <a href="/#contact">Contact</a>
       <a href="/resume/Josh_Hiller_Resume.pdf" target="_blank" rel="noopener">Resume</a>
     </div>
+
+    <!-- Mobile Jump to Section Dropdown -->
+    <div class="mobile-nav-dropdown">
+      <select id="jump-to-section" aria-label="Jump to section">
+        <option value="">Jump to...</option>
+        <option value="#home">Home</option>
+        <option value="#projects">Projects</option>
+        <option value="#skills">Skills</option>
+        <option value="#learning">Learning</option>
+        <option value="#education">Education</option>
+        <option value="#certifications">Certifications</option>
+        <option value="#experience">Experience</option>
+        <option value="#testimonials">Testimonials</option>
+        <option value="#about">About</option>
+        <option value="#contact">Contact</option>
+      </select>
+    </div>
   </div>
 </nav>
 
@@ -133,13 +150,46 @@ const { title = "Josh Hiller — Portfolio", description = "Software engineer fo
       }
 
       @media (max-width: 480px) {
-        .nav-links {
-          gap: 2px;
-        }
-
         .nav-links a {
           font-size: 0.75rem;
           padding: 3px 5px;
+        }
+      }
+
+      /* Mobile Jump to Section Dropdown */
+      .mobile-nav-dropdown {
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        
+        .mobile-nav-dropdown {
+          display: block;
+        }
+        
+        .mobile-nav-dropdown select {
+          background: rgba(255, 255, 255, 0.1);
+          color: #e5e7eb;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 8px;
+          padding: 8px 12px;
+          font-size: 0.9rem;
+          cursor: pointer;
+          backdrop-filter: blur(10px);
+        }
+        
+        .mobile-nav-dropdown select:focus {
+          outline: none;
+          border-color: #3b82f6;
+          box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        
+        .mobile-nav-dropdown select option {
+          background: #1e293b;
+          color: #e5e7eb;
         }
       }
 
@@ -173,6 +223,30 @@ const { title = "Josh Hiller — Portfolio", description = "Software engineer fo
             top: 0,
             behavior: 'smooth'
           });
+        });
+      }
+
+      // Jump to section functionality
+      const jumpToSection = document.getElementById('jump-to-section') as HTMLSelectElement;
+      
+      if (jumpToSection) {
+        jumpToSection.addEventListener('change', function() {
+          const targetSection = this.value;
+          if (targetSection) {
+            const target = document.querySelector(targetSection) as HTMLElement;
+            if (target) {
+              const navHeight = (document.querySelector('.nav') as HTMLElement)?.offsetHeight || 0;
+              const targetPosition = target.offsetTop - navHeight - 20;
+              
+              window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+              });
+              
+              // Reset dropdown
+              this.value = '';
+            }
+          }
         });
       }
     </script>
