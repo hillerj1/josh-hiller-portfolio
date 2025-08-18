@@ -58,6 +58,37 @@ const xp = (await getCollection('experience')).sort((a, b) => {
       </a>
     </div>
 
+    <!-- HIGHLIGHTS SECTION -->
+    <section class="highlights-section">
+      <div class="container">
+        <div class="highlights-grid">
+          <div class="highlight-card">
+            <div class="highlight-icon">💼</div>
+            <div class="highlight-content">
+              <h3>Current Role</h3>
+              <p>Sofware Developer Intern @ Sigma Software</p>
+            </div>
+          </div>
+          
+          <div class="highlight-card">
+            <div class="highlight-icon">🎓</div>
+            <div class="highlight-content">
+              <h3>Education</h3>
+              <p>Union College, NY</p>
+            </div>
+          </div>
+          
+          <div class="highlight-card">
+            <div class="highlight-icon">⚛️</div>
+            <div class="highlight-content">
+              <h3>Expertise</h3>
+              <p>Computational Physics & Software</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="scroll-cue" aria-hidden="true">
       <span class="scroll-text">Scroll</span>
       <svg class="scroll-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -523,12 +554,16 @@ const xp = (await getCollection('experience')).sort((a, b) => {
     .card, .card-link, .skill-card, .xp-card, blockquote.card {
       transition: all 0.2s ease;
       cursor: pointer;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
     }
     
     .card:hover, .card-link:hover, .skill-card:hover, .xp-card:hover, blockquote.card:hover {
-      border-color: var(--card-border-hover, #475569);
+      border-color: rgba(59, 130, 246, 0.3);
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.12);
     }
     
     /* Project cards get special hover treatment */
@@ -817,6 +852,58 @@ const xp = (await getCollection('experience')).sort((a, b) => {
       transform: translateX(4px);
     }
 
+    /* Highlights Section */
+    .highlights-section {
+      padding: 60px 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 0;
+    }
+
+    .highlight-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(59, 130, 246, 0.3);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .highlight-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .highlight-content h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .highlight-content p {
+      margin: 0;
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+
     /* Enhanced Scroll Cue */
     .scroll-cue {
       display: flex;
@@ -966,6 +1053,47 @@ const xp = (await getCollection('experience')).sort((a, b) => {
       .cta-button {
         padding: 14px 28px;
         font-size: 1rem;
+      }
+
+      .highlights-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .highlight-card {
+        padding: 24px 16px;
+      }
+
+      .highlight-icon {
+        font-size: 2.5rem;
+      }
+
+      .highlight-content h3 {
+        font-size: 1.1rem;
+      }
+
+      .highlight-content p {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Additional mobile improvements */
+    @media (max-width: 480px) {
+      .highlights-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .highlight-card {
+        padding: 20px 16px;
+      }
+
+      .section {
+        padding: 40px 0;
+      }
+
+      .container {
+        padding: 0 20px;
       }
     }
   </style>

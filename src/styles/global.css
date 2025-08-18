@@ -239,14 +239,14 @@ img{ max-width:100%; display:block; }
   font-family:"Space Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
   font-weight:1000;
   letter-spacing:.2px;
-  font-size: clamp(5rem, 14vw, 16rem);
+  font-size: clamp(8rem, 20vw, 28rem);
   line-height:1.04;
   margin:0 0 12px;
 }
 
 /* Larger subtitle under the title */
 .hero .subtitle{
-  font-size:clamp(1.3rem, 3.2vw, 2.2rem);
+  font-size:clamp(1.1rem, 2.5vw, 1.8rem);
   font-weight:600;
   opacity:.98;
   margin:0;
@@ -262,10 +262,10 @@ img{ max-width:100%; display:block; }
 
 .hero-title{
   font-family:"Space Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-  font-weight:700;
+  font-weight:1000;
   letter-spacing:.2px;
   line-height:1.04;
-  font-size: clamp(5rem, 14vw, 16rem); /* TEMPORARY !important */
+  font-size: clamp(1rem, 10vw, 10rem) !important;
   margin:0 0 12px;
 }
 
