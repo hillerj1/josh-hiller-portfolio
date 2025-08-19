@@ -532,7 +532,7 @@ const xp = (await getCollection('experience')).sort((a, b) => {
       </ul>
 
       <p>
-        <strong>What I'm looking for:</strong> roles where I can ship real software (data/infra, simulation, dev tools)
+        <strong>What I'm looking for:</strong> Roles where I can ship real software (data/infra, simulation, dev tools)
         and keep a foot in quantum (algorithms, simulation, education, or platform tooling).
       </p>
 
@@ -589,7 +589,7 @@ const xp = (await getCollection('experience')).sort((a, b) => {
           
           <div class="stat-card card">
             <div class="stat-number" id="total-commits">-</div>
-            <div class="stat-label">Total Contributions (Past Year)</div>
+            <div class="stat-label">Total Contributions (Past 6 Months)</div>
           </div>
           
           <div class="stat-card card">
@@ -597,6 +597,8 @@ const xp = (await getCollection('experience')).sort((a, b) => {
             <div class="stat-label">Top Language</div>
           </div>
         </div>
+
+
       </div>
     </div>
   </section>
@@ -1259,43 +1261,12 @@ const xp = (await getCollection('experience')).sort((a, b) => {
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .recent-activity {
-      min-height: 150px;
-    }
-
     .loading {
       color: #94a3b8;
       font-style: italic;
     }
 
-    .activity-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
 
-    .activity-item:last-child {
-      border-bottom: none;
-    }
-
-    .activity-icon {
-      width: 20px;
-      height: 20px;
-      color: #3b82f6;
-    }
-
-    .activity-text {
-      font-size: 0.9rem;
-      color: #e5e7eb;
-    }
-
-    .activity-time {
-      font-size: 0.8rem;
-      color: #94a3b8;
-      margin-left: auto;
-    }
 
     /* Responsive adjustments */
     @media (max-width: 768px) {
@@ -1638,7 +1609,7 @@ const xp = (await getCollection('experience')).sort((a, b) => {
         // Update stats
         const starsElement = document.getElementById('total-stars');
         const reposElement = document.getElementById('total-repos');
-        const languageElement = document.getElementById('total-repos');
+        const languageElement = document.getElementById('top-language');
         
         if (starsElement) starsElement.textContent = totalStars.toLocaleString();
         if (reposElement) reposElement.textContent = totalRepos.toLocaleString();
@@ -1657,9 +1628,6 @@ const xp = (await getCollection('experience')).sort((a, b) => {
             labelElement.textContent = 'Total Contributions (Past Year)';
           }
         }
-        
-        // Display recent activity
-        displayRecentActivity(contributionData.recentActivity);
         
         // Create accurate contribution graph from repository data
         createAccurateContributionGraph(contributionData);
@@ -1691,9 +1659,7 @@ const xp = (await getCollection('experience')).sort((a, b) => {
     async function buildContributionData(repos) {
       const contributionData = {
         dailyActivity: {},
-        totalContributions: 0,
-        recentActivity: [],
-        repoStats: {}
+        totalContributions: 0
       };
       
       // Initialize last 365 days with 0 activity
@@ -1728,24 +1694,6 @@ const xp = (await getCollection('experience')).sort((a, b) => {
                 }
               }
             });
-            
-            // Add to recent activity
-            if (commits.length > 0) {
-              contributionData.recentActivity.push({
-                type: 'PushEvent',
-                repo: repo.name,
-                date: commits[0].commit.author.date,
-                message: commits[0].commit.message
-              });
-            }
-            
-            // Store repo stats
-            contributionData.repoStats[repo.name] = {
-              commits: commits.length,
-              stars: repo.stargazers_count || 0,
-              language: repo.language || 'Unknown'
-            };
-            
           }
           
           // Small delay to avoid rate limiting
@@ -1755,9 +1703,6 @@ const xp = (await getCollection('experience')).sort((a, b) => {
           console.warn(`Error processing repo ${repo.name}:`, error);
         }
       }
-      
-      // Sort recent activity by date
-      contributionData.recentActivity.sort((a, b) => new Date(b.date) - new Date(a.date));
       
       console.log('Contribution data built:', contributionData);
       return contributionData;
@@ -1793,32 +1738,12 @@ const xp = (await getCollection('experience')).sort((a, b) => {
         }
       }
       
-      // Show fallback activity
-      const activityContainer = document.getElementById('recent-activity');
-      if (activityContainer) {
-        activityContainer.innerHTML = `
-          <div class="activity-item">
-            <div class="activity-icon">📝</div>
-            <div class="activity-text">Working on quantum computing projects</div>
-            <div class="activity-time">Recently</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-icon">🆕</div>
-            <div class="activity-text">Building computational physics simulations</div>
-            <div class="activity-time">Recently</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-icon">🍴</div>
-            <div class="activity-text">Contributing to open source projects</div>
-            <div class="activity-time">Recently</div>
-          </div>
-        `;
-      }
+      
       
       // Create a simple fallback contribution graph
       createSimpleFallbackGraph();
     }
-
+    
     function createSimpleFallbackGraph() {
       const container = document.getElementById('contribution-graph');
       if (!container) return;
@@ -1849,49 +1774,9 @@ const xp = (await getCollection('experience')).sort((a, b) => {
         .sort(([,a], [,b]) => b - a)[0]?.[0] || 'N/A';
     }
 
-    function displayRecentActivity(activities) {
-      const container = document.getElementById('recent-activity');
-      if (!container) return;
-      
-      container.innerHTML = '';
-      
-      if (activities.length === 0) {
-        container.innerHTML = '<div style="text-align: center; color: #94a3b8; padding: 20px;">No recent activity found</div>';
-        return;
-      }
-      
-      activities.slice(0, 5).forEach(activity => {
-        const item = document.createElement('div');
-        item.className = 'activity-item';
-        
-        const icon = document.createElement('div');
-        icon.className = 'activity-icon';
-        icon.innerHTML = '📝';
-        
-        const text = document.createElement('div');
-        text.className = 'activity-text';
-        text.textContent = `Pushed to ${activity.repo}`;
-        
-        const time = document.createElement('div');
-        time.className = 'activity-time';
-        time.textContent = formatTimeAgo(new Date(activity.date));
-        
-        item.appendChild(icon);
-        item.appendChild(text);
-        item.appendChild(time);
-        container.appendChild(item);
-      });
-    }
 
-    function formatTimeAgo(date) {
-      const now = new Date();
-      const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
-      
-      if (diffInHours < 1) return 'Just now';
-      if (diffInHours < 24) return `${diffInHours}h ago`;
-      if (diffInHours < 168) return `${Math.floor(diffInHours / 24)}d ago`;
-      return `${Math.floor(diffInHours / 168)}w ago`;
-    }
+
+
 
     function createAccurateContributionGraph(contributionData) {
       const container = document.getElementById('contribution-graph');
